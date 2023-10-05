@@ -45,3 +45,7 @@ services:
 networks:
   fullcycle:
     driver: bridge
+
+volumes:
+  db:
+    local
