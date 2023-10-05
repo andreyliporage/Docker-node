@@ -48,4 +48,4 @@ networks:
 
 volumes:
   db:
-    local
+    driver: local
