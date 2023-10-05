@@ -40,9 +40,6 @@ services:
       - "8080:80"
     networks:
       - fullcycle
-    depends_on:
-      - app
-    entrypoint: dockerize -wait tcp://app:3000 -timeout 20s docker-entrypoint.sh
 
 networks:
   fullcycle:
