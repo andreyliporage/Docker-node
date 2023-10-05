@@ -28,16 +28,7 @@ services:
       - fullcycle
     volumes:
       - ./mysql:/var/lib/mysql
-
-  db_seeder:
-    image: mysql:5.7
-    volumes:
-      - ./init.sql:/db.sql
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD="true"
-    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root --host=db --port=3306 nodedb < /init.sql && exit"]
-    depends_on:
-      - db
+      - init.sql:/docker-entrypoint-initdb.d
 
   nginx:
     restart: always
