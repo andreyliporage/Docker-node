@@ -28,7 +28,7 @@ services:
       - fullcycle
     volumes:
       - ./mysql:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d
+      - ./sql:/docker-entrypoint-initdb.d
 
   nginx:
     restart: always
