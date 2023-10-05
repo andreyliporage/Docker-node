@@ -40,6 +40,8 @@ services:
       - "8080:80"
     networks:
       - fullcycle
+    depends_on:
+      - app
 
 networks:
   fullcycle:
