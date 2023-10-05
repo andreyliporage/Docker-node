@@ -16,13 +16,6 @@ services:
       db:
         condition: service_healthy
         restart: true
-    healthcheck:
-      test: curl -f https://db:3306 || exit 1
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-      start_interval: 5s
 
   db:
     image: mysql:5.7
@@ -40,6 +33,13 @@ services:
       - ./sql:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    healthcheck:
+      test: curl -f https://db:3306 || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+      start_interval: 5s
 
   nginx:
     restart: always
