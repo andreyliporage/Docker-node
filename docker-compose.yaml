@@ -13,7 +13,9 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - db:
+        condition: service_healthy
+        restart: true
 
   db:
     image: mysql:5.7
@@ -40,7 +42,9 @@ services:
     networks:
       - fullcycle
     depends_on:
-      - app
+      - app:
+        condition: service_healthy
+        restart: true
 
 networks:
   fullcycle:
