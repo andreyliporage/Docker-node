@@ -12,10 +12,9 @@ services:
     tty: true
     ports:
       - "3000:3000"
+    entrypoint: wait-for db:3306 -t 40 -- ./start.sh
     depends_on:
-      db:
-        condition: service_healthy
-        restart: true
+      - db
 
   db:
     image: mysql:5.7
@@ -31,17 +30,6 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
-    ports:
-      - "3306:3306"
-    expose:
-      - 3306
-    healthcheck:
-      test: curl -f https://db:3306 || exit 1
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-      start_interval: 5s
 
   nginx:
     restart: always
@@ -53,9 +41,7 @@ services:
     networks:
       - fullcycle
     depends_on:
-      app:
-        condition: service_started
-        restart: true
+      - app
 
 networks:
   fullcycle:
