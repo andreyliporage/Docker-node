@@ -32,7 +32,7 @@ services:
       - ./mysql:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
     healthcheck:
-      test: curl -f https://localhost || exit 1
+      test: curl -f https://db || exit 1
       interval: 30s
       timeout: 10s
       retries: 3
