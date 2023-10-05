@@ -14,7 +14,7 @@ services:
       - "3000:3000"
     depends_on:
       db:
-        condition: service_completed_successfully
+        condition: service_started
         restart: true
 
   db:
@@ -43,7 +43,7 @@ services:
       - fullcycle
     depends_on:
       app:
-        condition: service_completed_successfully
+        condition: service_started
         restart: true
 
 networks:
