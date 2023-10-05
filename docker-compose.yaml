@@ -33,6 +33,8 @@ services:
       - ./sql:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    expose:
+      - 3306
     healthcheck:
       test: curl -f https://db:3306 || exit 1
       interval: 30s
