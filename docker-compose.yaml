@@ -2,19 +2,17 @@ version: '3.8'
 
 services: 
   app: 
-    build:
-      context: node
+    build: node
     container_name: node
     networks:
       - fullcycle
     volumes:
-      - ./node:/usr/src/app
+      - ./node:/app
     tty: true
     ports:
       - "3000:3000"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
   db:
     image: mysql:5.7
@@ -25,11 +23,6 @@ services:
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-proot"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
     networks:
       - fullcycle
     volumes:

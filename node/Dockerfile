@@ -1,15 +1,14 @@
 FROM node:18
 
-WORKDIR /usr/src/app
+WORKDIR /app
+RUN chmod -R 777 /app
 
-COPY package*.json ./
-
-ENV DOCKERIZE_VERSION v0.7.0
+COPY package*.json ./   
 
 RUN npm install
 
-COPY . .
+COPY . ./
 
 EXPOSE 3000
 
-CMD [ "node", "index.js" ]
+ENTRYPOINT [ "node", "index.js" ]
